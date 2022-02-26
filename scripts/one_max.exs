@@ -1,14 +1,15 @@
 population = for _ <- 1..100, do: for _ <- 1..1000, do: Enum.random(0..1)
-population
 
 evaluate = fn population -> 
     Enum.sort_by(population, &Enum.sum/1, &>=/2)
 end
+
 selection = fn population -> 
     population
     |> Enum.chunk_every(2)
     |> Enum.map(&List.to_tuple(&1))
 end
+
 crossover = fn population -> 
     Enum.reduce(population, [],
         fn {p1, p2}, acc -> 
@@ -16,6 +17,18 @@ crossover = fn population ->
             {{h1, t1}, {h2, t2}} = {Enum.split(p1, cx_point), Enum.split(p2, cx_point)}
             [h1 ++ t2, h2 ++ t1 | acc]
         end)
+end
+
+mutation = fn population -> 
+    population
+    |> Enum.map(
+        fn chromossome ->
+            if :rand.uniform() < 0.05 do
+                Enum.shuffle(chromossome)
+            else
+                chromossome    
+            end
+    end)
 end
 
 algorithm = fn population, algorithm ->
@@ -29,6 +42,7 @@ algorithm = fn population, algorithm ->
         |> evaluate.()
         |> selection.()
         |> crossover.()
+        |> mutation.()
         |> algorithm.(algorithm)
     end
 end
