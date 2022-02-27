@@ -4,5 +4,5 @@ max_fitness = 1000
 
 soln = Genetic.run(fitness_function, genotype, max_fitness)
 
-IO.write("|n")
+IO.write("\n")
 IO.inspect(soln)
