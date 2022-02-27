@@ -1,22 +1,22 @@
 defmodule Genetic do
-  def run() do
-    population = initialize()
+  def run(fitness_function, genotype, max_fitness) do
+    population = initialize(genotype)
     population
-    |> evolve()
+    |> evolve(fitness_function, genotype, max_fitness)
   end
 
-  def evolve(population, max_fitness) do
-    population = evaluate(population, ..., opts)
+  def evolve(population, fitness_function, genotype, max_fitness) do
+    population = evaluate(population, fitness_function)
     best = hd(population)
-    IO.write("|rCurrent Best: ...")
-    if ... == max_fitness do
+    IO.write("|rCurrent Best: #{fitness_function.(best)}")
+    if fitness_function.(best) == max_fitness do
       best
     else
       population
       |> select()
       |> crossover()
       |> mutation()
-      |> evolve()
+      |> evolve(fitness_function, genotype, max_fitness)
     end
   end
 
