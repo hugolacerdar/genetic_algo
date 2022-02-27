@@ -1,18 +1,26 @@
 defmodule Genetic do
-  @moduledoc """
-  Documentation for `Genetic`.
-  """
+  def run() do
+    population = initialize()
+    population
+    |> evolve()
+  end
 
-  @doc """
-  Hello world.
+  def evolve(population, max_fitness) do
+    population = evaluate(population, ..., opts)
+    best = hd(population)
+    IO.write("|rCurrent Best: ...")
+    if ... == max_fitness do
+      best
+    else
+      population
+      |> select()
+      |> crossover()
+      |> mutation()
+      |> evolve()
+    end
+  end
 
-  ## Examples
-
-      iex> Genetic.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def initialize(genotype) do
+    for _ <- 1..100, do: genotype.()
   end
 end
