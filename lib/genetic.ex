@@ -6,7 +6,7 @@ defmodule Genetic do
   end
 
   def evolve(population, fitness_function, genotype, max_fitness, opts \\ []) do
-    population = evaluate(population, fitness_function)
+    population = evaluate(population, fitness_function, opts)
     best = hd(population)
     IO.write("|rCurrent Best: #{fitness_function.(best)}")
     if fitness_function.(best) == max_fitness do
