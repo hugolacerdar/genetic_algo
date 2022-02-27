@@ -28,4 +28,10 @@ defmodule Genetic do
     population 
     |> Enum.sort_by(fitness_function, &>=/2)
   end
+
+  def select(population) do
+    population
+    |> Enum.chunk_every(2)
+    |> Enum.map(&List.to_tuple(&1))
+  end
 end
