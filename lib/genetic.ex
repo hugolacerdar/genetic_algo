@@ -23,4 +23,9 @@ defmodule Genetic do
   def initialize(genotype) do
     for _ <- 1..100, do: genotype.()
   end
+
+  def evaluate(population, fitness_function) do
+    population 
+    |> Enum.sort_by(fitness_function, &>=/2)
+  end
 end
