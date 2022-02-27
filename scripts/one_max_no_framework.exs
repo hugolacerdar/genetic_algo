@@ -22,11 +22,11 @@ end
 mutation = fn population -> 
     population
     |> Enum.map(
-        fn chromossome ->
+        fn chromosome ->
             if :rand.uniform() < 0.05 do
-                Enum.shuffle(chromossome)
+                Enum.shuffle(chromosome)
             else
-                chromossome    
+                chromosome    
             end
     end)
 end
