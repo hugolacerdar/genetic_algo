@@ -13,14 +13,15 @@ defmodule Genetic do
       best
     else
       population
-      |> select(, opts)
-      |> crossover(, opts)
-      |> mutation(, opts)
+      |> select(opts)
+      |> crossover(opts)
+      |> mutation(opts)
       |> evolve(fitness_function, genotype, max_fitness, opts)
     end
   end
 
   def initialize(genotype, opts \\ []) do
+    population_size = Keyword.get(opts, :population_size, 100)
     for _ <- 1..100, do: genotype.()
   end
 
@@ -50,11 +51,11 @@ defmodule Genetic do
 
   def mutation(population, opts \\ []) do
     population 
-    |> Enum.map(fn chromossome ->
+    |> Enum.map(fn chromosome ->
       if :rand.uniform < 0.05 do
-        Enum.shuffle(chromossome)
+        Enum.shuffle(chromosome)
       else
-        chromossome
+        chromosome
       end
     end)
   end
