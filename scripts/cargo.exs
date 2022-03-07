@@ -32,9 +32,8 @@ defmodule Cargo do
   end
 
   @impl true
-  def terminate?(population, generation) do
-    # Enum.max_by(population, &Cargo.fitness_function/1).fitness == 53
-    generation == 100
+  def terminate?(_population, generation, _temperature) do
+    generation == 1000
   end
 
 end
