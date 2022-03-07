@@ -14,7 +14,7 @@ defmodule Portfolio do
 
   @impl true
   def fitness_function(chromosome) do
-    chromosome
+    chromosome.genes
     |> Enum.map(fn {roi, risk} -> 2 * roi - risk end)
     |> Enum.sum()
   end
